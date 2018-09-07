@@ -1,15 +1,21 @@
 import React from 'react';
 import VideoListItem from "../components/video-list-item";
 
-const VideoList = () => {
-    const movies = ["film 1", "film 2", "film 3", "film 4"];
+const VideoList = (props) => {
+    const {moviesList} = props;
+
+    function receiveCallBack(movie) {
+        props.callback(movie);
+    }
 
     return (
-        <div id="list-item">
-            <ul>
+        <div>
+
+            <h2 className="mb-3">Films les plus populaires</h2>
+            <ul className="list-unstyled">
                 {
-                    movies.map(movie => {
-                        return <VideoListItem key={movie.toString()} name={movie} />;
+                    moviesList.map(movie => {
+                        return <VideoListItem key={movie.id.toString()} movie={movie} callback={receiveCallBack}/>;
                     })
                 }
             </ul>
